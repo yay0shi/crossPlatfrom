@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../extensions/extensions.dart';
+import '../../widgets/widgets.dart';
 import 'widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,19 +15,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+      appBar: AppBar(title: const Text('Главная')),
+      body: AdaptivePageBody(
+        maxWidth: 960,
         child: Column(
           spacing: 20,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Header', style: Theme.of(context).textTheme.headlineLarge),
+            Text(
+              'Список элементов',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
             ListView.separated(
               primary: false,
               shrinkWrap: true,
               itemCount: 10,
-              itemBuilder: (_, _) => ContentCard(),
+              itemBuilder: (_, index) => ContentCard(contentId: index + 1),
               separatorBuilder: (_, _) => 16.ph,
             ),
           ],

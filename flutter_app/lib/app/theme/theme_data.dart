@@ -20,6 +20,7 @@ final _appBarTheme = AppBarTheme(
   elevation: 0,
   scrolledUnderElevation: 0,
   centerTitle: true,
+  iconTheme: IconThemeData(color: ThemeColors.white),
   titleTextStyle: TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,

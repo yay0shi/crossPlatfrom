@@ -18,13 +18,15 @@ final router = GoRouter(
       pageBuilder: (_, state) =>
           MaterialPage(key: state.pageKey, child: const HomeScreen()),
     ),
-    // Для следующей лабораторной работы.
-    // GoRoute(
-    //   path: '/content/:id',
-    //   pageBuilder: (_, state) => MaterialPage(
-    //     key: state.pageKey,
-    //     child: ContentScreen(contentId: state.pathParameters['id']!),
-    //   ),
-    // ),
+    GoRoute(
+      path: '/content/:id',
+      pageBuilder: (_, state) {
+        final contentId = int.parse(state.pathParameters['id']!);
+        return MaterialPage(
+          key: state.pageKey,
+          child: ContentScreen(contentId: contentId),
+        );
+      },
+    ),
   ],
 );
