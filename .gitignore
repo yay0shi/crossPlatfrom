@@ -1,0 +1,39 @@
+# IDE settings
+**/.idea/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET build and test output
+**/bin/
+**/obj/
+**/TestResults/
+**/coverage/
+*.trx
+*.coverage
+*.coveragexml
+*.nupkg
+*.snupkg
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+*.pfx
+*.p12
+
+# Temporary files and logs
+*.log
+*.tmp
+*.bak
+*.swp
+~$*
+**/__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+pr/

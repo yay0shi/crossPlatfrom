@@ -1,0 +1,16 @@
+@Server_HostAddress = http://localhost:5055
+
+# Planned requests. Implement controller actions before running them.
+GET {{Server_HostAddress}}/api/movies
+Accept: application/json
+
+###
+GET {{Server_HostAddress}}/api/movies/1
+Accept: application/json
+
+###
+GET {{Server_HostAddress}}/api/movies/999999
+Accept: application/problem+json
+
+###
+GET {{Server_HostAddress}}/posters/movie-1.jpg

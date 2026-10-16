@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ContentCard extends StatelessWidget {
-  const ContentCard({required this.contentId, super.key});
+import '../../../../data/dio/set_up.dart';
+import '../../../../domain/repositories/movies/model/movie.dart';
 
-  final int contentId;
+class ContentCard extends StatelessWidget {
+  const ContentCard({required this.movie, super.key});
+
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
     final imageSize = 100.0;
 
     return InkWell(
-      onTap: () => context.push('/content/$contentId'),
+      onTap: () => context.push('/content/${movie.id}'),
       borderRadius: BorderRadius.circular(16),
       child: SizedBox(
         height: imageSize,
@@ -21,11 +24,16 @@ class ContentCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                'assets/images/test_image.jpg',
+              child: Image.network(
+                resolvePosterUrl(movie.posterUrl),
                 height: imageSize,
                 width: imageSize,
                 fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => SizedBox(
+                  width: imageSize,
+                  height: imageSize,
+                  child: const Icon(Icons.broken_image_outlined),
+                ),
               ),
             ),
             Expanded(
@@ -34,14 +42,15 @@ class ContentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Заголовок $contentId',
+                    movie.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Expanded(
                     child: Text(
-                      'Описание элемента $contentId',
+                      '${movie.releaseYear} · ${movie.genres.join(', ')}\n'
+                      '${movie.description}',
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium,

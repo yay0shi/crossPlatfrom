@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../extensions/extensions.dart';
-import '../../widgets/widgets.dart';
 
 class ContentScreen extends StatelessWidget {
   const ContentScreen({required this.contentId, super.key});
@@ -11,37 +10,31 @@ class ContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Подробности')),
-      body: AdaptivePageBody(
-        maxWidth: 900,
+      appBar: AppBar(title: const Text('Details')),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 480),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      'assets/images/test_image.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/images/test_image.jpg',
+                width: double.infinity,
+                height: 240,
+                fit: BoxFit.cover,
               ),
             ),
             20.ph,
             Text(
-              'Заголовок $contentId',
+              'Title $contentId',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             12.ph,
             Text(
-              'Подробная информация об элементе $contentId. '
-              'На этой странице показаны изображение, заголовок и описание '
-              'выбранного элемента.',
+              'Детальная информация для записи $contentId. '
+              'Страница отображает картинку, заголовок, описание '
+              'выбранной записи.',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
