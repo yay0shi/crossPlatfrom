@@ -10,6 +10,18 @@ class MovieRepository implements MovieRepositoryInterface {
   final Dio dio;
 
   @override
+  Future<Movie> getMovieById(int id) async {
+    final response = await dio.get<Map<String, dynamic>>(
+      Endpoints.movieById(id),
+    );
+    final data = response.data?['data'];
+    if (data is! Map<String, dynamic>) {
+      throw const FormatException('Сервер вернул некорректные данные фильма.');
+    }
+    return Movie.fromJson(data);
+  }
+
+  @override
   Future<List<Movie>> getMovies() async {
     final response = await dio.get<Map<String, dynamic>>(Endpoints.movies);
     final data = response.data?['data'];

@@ -5,6 +5,7 @@ import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../app/features/home/bloc/home_bloc.dart';
+import '../app/features/content/bloc/content_bloc.dart';
 import '../data/dio/set_up.dart';
 import '../domain/repositories/movies/movie_repository.dart';
 import '../domain/repositories/movies/movie_repository_interface.dart';
@@ -19,6 +20,12 @@ Future<void> setupLocator() async {
   getIt.registerSingleton<Dio>(dio, dispose: (client) => client.close());
   getIt.registerSingleton<MovieRepositoryInterface>(MovieRepository(dio: dio));
   Bloc.observer = TalkerBlocObserver(talker: talker);
+  getIt.registerFactory<ContentBloc>(
+    () => ContentBloc(
+      movieRepository: getIt<MovieRepositoryInterface>(),
+      talker: talker,
+    ),
+  );
   getIt.registerFactory<HomeBloc>(
     () => HomeBloc(
       movieRepository: getIt<MovieRepositoryInterface>(),
